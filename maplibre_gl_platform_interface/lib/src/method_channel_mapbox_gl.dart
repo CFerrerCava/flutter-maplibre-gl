@@ -152,9 +152,11 @@ class MethodChannelMaplibreGl extends MapLibreGlPlatform {
               hitTestBehavior: PlatformViewHitTestBehavior.opaque,
             );
           },
+          // onCreatePlatformView: (PlatformViewCreationParams params) {
+          //   final SurfaceAndroidViewController controller =
+          //       PlatformViewsService.initSurfaceAndroidView(
           onCreatePlatformView: (PlatformViewCreationParams params) {
-            final SurfaceAndroidViewController controller =
-                PlatformViewsService.initSurfaceAndroidView(
+            final controller = WrappedPlatformViewsService.initAndroidView(
               id: params.id,
               viewType: 'plugins.flutter.io/mapbox_gl',
               layoutDirection: TextDirection.ltr,
@@ -174,7 +176,8 @@ class MethodChannelMaplibreGl extends MapLibreGlPlatform {
           },
         );
       } else {
-        return AndroidView(
+        //  return AndroidView(
+        return AndroidViewWithWrappedController(
           viewType: 'plugins.flutter.io/mapbox_gl',
           onPlatformViewCreated: onPlatformViewCreated,
           gestureRecognizers: gestureRecognizers,
