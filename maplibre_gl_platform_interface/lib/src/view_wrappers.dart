@@ -17,7 +17,8 @@ class WrappedPlatformViewsService {
       creationParamsCodec: creationParamsCodec,
       onFocus: onFocus,
     );
-    return TextureAndroidViewControllerWrapper(view);
+    return TextureAndroidViewControllerWrapper(
+        view as TextureAndroidViewController);
   }
 }
 
@@ -43,7 +44,7 @@ class TextureAndroidViewControllerWrapper
   Future<void> clearFocus() => _controller.clearFocus();
 
   @override
-  Future<void> create({Size? size}) => _controller.create(size: size);
+  // Future<void> create({Size? size}) => _controller.create(size: size);
 
   @override
   // ignore: invalid_use_of_visible_for_testing_member
@@ -91,6 +92,16 @@ class TextureAndroidViewControllerWrapper
 
   @override
   int get viewId => _controller.viewId;
+
+  @override
+  // TODO: implement requiresViewComposition
+  bool get requiresViewComposition => throw UnimplementedError();
+
+  @override
+  Future<void> create({Size? size, Offset? position}) {
+    _controller.create(size: size);
+    throw UnimplementedError();
+  }
 }
 
 class AndroidViewWithWrappedController extends StatefulWidget {
