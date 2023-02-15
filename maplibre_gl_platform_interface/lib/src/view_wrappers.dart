@@ -95,7 +95,7 @@ class TextureAndroidViewControllerWrapper
 
   @override
   // TODO: implement requiresViewComposition
-  bool get requiresViewComposition => throw UnimplementedError();
+  bool get requiresViewComposition => _controller.requiresViewComposition;
 
   @override
   Future<void> create({Size? size, Offset? position}) {
