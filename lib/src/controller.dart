@@ -26,7 +26,7 @@ typedef void OnCameraTrackingDismissedCallback();
 typedef void OnCameraTrackingChangedCallback(MyLocationTrackingMode mode);
 
 typedef void OnCameraIdleCallback();
-
+typedef void onCameraMoveCallback();
 typedef void OnMapIdleCallback();
 
 /// Controller for a single MaplibreMap instance running on the host platform.
@@ -59,6 +59,7 @@ class MaplibreMapController extends ChangeNotifier {
     this.onMapIdle,
     this.onUserLocationUpdated,
     this.onCameraIdle,
+    this.onCameraMove,
   }) : _mapboxGlPlatform = mapboxGlPlatform {
     _cameraPosition = initialCameraPosition;
 
@@ -84,11 +85,17 @@ class MaplibreMapController extends ChangeNotifier {
 
     _mapboxGlPlatform.onCameraMoveStartedPlatform.add((_) {
       _isCameraMoving = true;
+      if (onCameraMove != null) {
+        onCameraMove!();
+      }
       notifyListeners();
     });
 
     _mapboxGlPlatform.onCameraMovePlatform.add((cameraPosition) {
       _cameraPosition = cameraPosition;
+      // if (onCameraMove != null) {
+      //   onCameraMove!();
+      // }
       notifyListeners();
     });
 
@@ -181,7 +188,7 @@ class MaplibreMapController extends ChangeNotifier {
   final OnCameraTrackingChangedCallback? onCameraTrackingChanged;
 
   final OnCameraIdleCallback? onCameraIdle;
-
+  final onCameraMoveCallback? onCameraMove;
   final OnMapIdleCallback? onMapIdle;
 
   /// Callbacks to receive tap events for symbols placed on this map.

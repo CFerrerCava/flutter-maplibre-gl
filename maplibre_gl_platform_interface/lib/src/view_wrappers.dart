@@ -98,9 +98,12 @@ class TextureAndroidViewControllerWrapper
   bool get requiresViewComposition => _controller.requiresViewComposition;
 
   @override
-  Future<void> create({Size? size, Offset? position}) {
-    _controller.create(size: size);
-    throw UnimplementedError();
+  Future<void> create({Size? size, Offset? position}) async {
+    await _controller.create(size: size, position: position);
+    // awaitingCreation = false;
+    if (size != null) {
+      await _controller.setSize(size);
+    }
   }
 }
 
