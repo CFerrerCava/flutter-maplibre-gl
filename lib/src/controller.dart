@@ -213,7 +213,7 @@ class MaplibreMapController extends ChangeNotifier {
   /// The current set of symbols on this map.
   ///
   /// The returned set will be a detached snapshot of the symbols collection.
-  Set<Symbol> get symbols => symbolManager!.annotations;
+  Set<Symbol>? get symbols => symbolManager?.annotations;
 
   /// Callbacks to receive tap events for lines placed on this map.
   final ArgumentCallbacks<Line> onLineTapped = ArgumentCallbacks<Line>();
@@ -221,7 +221,7 @@ class MaplibreMapController extends ChangeNotifier {
   /// The current set of lines on this map.
   ///
   /// The returned set will be a detached snapshot of the lines collection.
-  Set<Line> get lines => lineManager!.annotations;
+  Set<Line>? get lines => lineManager?.annotations;
 
   /// The current set of circles on this map.
   ///
