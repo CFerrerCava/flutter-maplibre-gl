@@ -85,8 +85,9 @@ class MaplibreMapController extends ChangeNotifier {
 
     _mapboxGlPlatform.onCameraMoveStartedPlatform.add((_) {
       _isCameraMoving = true;
+      _isHasGesture = _ ?? false;
       if (onCameraMove != null) {
-        onCameraMove!(_);
+        onCameraMove?.call(_);
       }
       notifyListeners();
     });
@@ -235,7 +236,10 @@ class MaplibreMapController extends ChangeNotifier {
 
   /// True if the map camera is currently moving.
   bool get isCameraMoving => _isCameraMoving;
+  //True if the map has gesture by user
+  bool get isHasGesture => _isHasGesture;
   bool _isCameraMoving = false;
+  bool _isHasGesture = false;
 
   /// Returns the most recent camera position reported by the platform side.
   /// Will be null, if [MapboxMap.trackCameraPosition] is false.
