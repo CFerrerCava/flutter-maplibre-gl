@@ -26,7 +26,7 @@ typedef void OnCameraTrackingDismissedCallback();
 typedef void OnCameraTrackingChangedCallback(MyLocationTrackingMode mode);
 
 typedef void OnCameraIdleCallback();
-typedef void onCameraMoveCallback();
+typedef void onCameraMoveCallback(bool? hasGesture);
 typedef void OnMapIdleCallback();
 
 /// Controller for a single MaplibreMap instance running on the host platform.
@@ -86,7 +86,7 @@ class MaplibreMapController extends ChangeNotifier {
     _mapboxGlPlatform.onCameraMoveStartedPlatform.add((_) {
       _isCameraMoving = true;
       if (onCameraMove != null) {
-        onCameraMove!();
+        onCameraMove!(_);
       }
       notifyListeners();
     });
@@ -820,7 +820,7 @@ class MaplibreMapController extends ChangeNotifier {
     final CircleOptions effectiveOptions =
         CircleOptions.defaultOptions.copyWith(options);
     final circle = Circle(getRandomString(), effectiveOptions, data);
-    await circleManager!.add(circle);
+    await circleManager?.add(circle);
     notifyListeners();
     return circle;
   }

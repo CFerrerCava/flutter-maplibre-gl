@@ -21,7 +21,7 @@ abstract class MapLibreGlPlatform {
 
   final onFeatureDraggedPlatform = ArgumentCallbacks<Map<String, dynamic>>();
 
-  final onCameraMoveStartedPlatform = ArgumentCallbacks<void>();
+  final onCameraMoveStartedPlatform = ArgumentCallbacks<bool?>();
 
   final onCameraMovePlatform = ArgumentCallbacks<CameraPosition>();
 
